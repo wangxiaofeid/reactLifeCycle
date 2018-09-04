@@ -1,12 +1,12 @@
 .App {
   text-align: left;
-  padding: 20px
+  padding: 20px;
+  width: 400px;
+  margin: 0 auto;
 }
 
 .father{
   background: #999;
-  width: 300px;
-  margin: 0 auto;
   padding: 30px;
 }
 

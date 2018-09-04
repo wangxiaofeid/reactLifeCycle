@@ -36,6 +36,11 @@ export default class Father extends Component {
           num: num + 1
         })
       }}>{num} + 1</button>
+      <div>
+        <button onClick={() => {
+          this.forceUpdate();
+        }}>forceUpdate</button>
+      </div>
       <Children num={num}/>
     </div>
   }
