@@ -6,47 +6,55 @@ export default class Father extends Component {
     super(props);
     this.state = {
       num: 1
-    }
-    console.log('father constructor');
+    };
+    console.log("father constructor");
   }
 
-  // 即将废弃 
+  // 即将废弃
   // componentWillMount() {
   //   console.log('father componentWillMount');
   // }
 
-  根据父组件传来的props按需更新自己的state
-  static getDerivedStateFromProps(props, state) {
-    console.log('father getDerivedStateFromProps');
+  根据父组件传来的props按需更新自己的state;
+  static getDerivedStateFromProps(nextProps, prevState) {
+    console.log("father getDerivedStateFromProps");
     return {
-      appProp: props.appProp
-    }
+      appProp: nextProps.appProp
+    };
   }
 
   render() {
-    console.log('father render');
+    console.log("father render");
     const { num, appProp } = this.state;
-    return <div className="father">
-      father:
-      <div>
-        父组件传过来的appProp: {appProp}
+    return (
+      <div className="father">
+        father:
+        <div>父组件传过来的appProp: {appProp}</div>
+        <button
+          onClick={() => {
+            this.setState({
+              num: num + 1
+            });
+          }}
+        >
+          {num} + 1
+        </button>
+        <div>
+          <button
+            onClick={() => {
+              this.forceUpdate();
+            }}
+          >
+            forceUpdate
+          </button>
+        </div>
+        <Children num={num} />
       </div>
-      <button onClick={() => {
-        this.setState({
-          num: num + 1
-        })
-      }}>{num} + 1</button>
-      <div>
-        <button onClick={() => {
-          this.forceUpdate();
-        }}>forceUpdate</button>
-      </div>
-      <Children num={num}/>
-    </div>
+    );
   }
 
   componentDidMount() {
-    console.log('father componentDidMount');
+    console.log("father componentDidMount");
   }
 
   // 即将废弃
@@ -55,7 +63,7 @@ export default class Father extends Component {
   // }
 
   shouldComponentUpdate(nextProps, nextState) {
-    console.log('father shouldComponentUpdate');
+    console.log("father shouldComponentUpdate");
     return true;
   }
 
@@ -66,19 +74,19 @@ export default class Father extends Component {
 
   // 在render后，挂载前调用；返回值作为componentDidUpdate的第三个参数
   getSnapshotBeforeUpdate(prevProps, prevState) {
-    console.log('father getSnapshotBeforeUpdate');
-    return 1
+    console.log("father getSnapshotBeforeUpdate");
+    return 1;
   }
 
   componentDidUpdate(nextProps, nextState, snapshot) {
-    console.log(`father componentDidUpdate, snapshot: ${snapshot}`)
+    console.log(`father componentDidUpdate, snapshot: ${snapshot}`);
   }
 
   componentWillUnmount() {
-    console.log('father componentWillUnmount')
+    console.log("father componentWillUnmount");
   }
 
   componentDidCatch(error, info) {
-    console.log('father componentDidCatch')
+    console.log("father componentDidCatch");
   }
 }
