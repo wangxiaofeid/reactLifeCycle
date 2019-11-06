@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Children from "./Children";
+import { Xx1, Xx2, Xx3 } from "./CompType";
 
 export default class Father extends Component {
   constructor(props, context, updater) {
@@ -15,7 +16,7 @@ export default class Father extends Component {
   //   console.log('father componentWillMount');
   // }
 
-  根据父组件传来的props按需更新自己的state;
+  //根据父组件传来的props按需更新自己的state;
   static getDerivedStateFromProps(nextProps, prevState) {
     console.log("father getDerivedStateFromProps");
     return {
@@ -49,6 +50,9 @@ export default class Father extends Component {
           </button>
         </div>
         <Children num={num} />
+        <Xx1 />
+        <Xx2 />
+        <Xx3 />
       </div>
     );
   }

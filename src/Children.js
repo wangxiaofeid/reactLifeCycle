@@ -7,12 +7,17 @@ export default class Children extends Component {
     console.log("children constructor");
   }
 
-  根据父组件传来的props按需更新自己的state;
+  //根据父组件传来的props按需更新自己的state;
   static getDerivedStateFromProps(nextProps, prevState) {
     console.log("children getDerivedStateFromProps");
     return {
       num: nextProps.num
     };
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log("children shouldComponentUpdate");
+    return true;
   }
 
   render() {
@@ -31,18 +36,13 @@ export default class Children extends Component {
     console.log("children componentDidMount");
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    console.log("children shouldComponentUpdate");
-    return true;
-  }
-
   getSnapshotBeforeUpdate(prevProps, prevState) {
-    console.log("children getSnapshotBeforeUpdate");
+    console.log("children getSnapshotBeforeUpdate", this.props, prevProps);
     return 1;
   }
 
-  componentDidUpdate(nextProps, nextState, snapshot) {
-    console.log(`children componentDidUpdate, snapshot: ${snapshot}`);
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    console.log(`children componentDidUpdate, snapshot: ${snapshot}`, this.props, prevProps);
   }
 
   componentWillUnmount() {
