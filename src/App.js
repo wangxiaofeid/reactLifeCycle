@@ -1,31 +1,17 @@
-import React, { Component } from 'react';
-import './App.css';
-import Father from './Father';
+import dva from 'dva';
+import 'moment/locale/zh-cn';
+import router from './router';
 
-class App extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            unmount: false,
-        };
-    }
-    render() {
-        const { unmount } = this.state;
-        return (
-            <div className="App">
-                <button
-                    onClick={() => {
-                        this.setState({
-                            unmount: !unmount,
-                        });
-                    }}
-                >
-                    {unmount ? '生成' : '销毁'}
-                </button>
-                {!unmount && <Father appProp="appProp" />}
-            </div>
-        );
-    }
-}
+const browserHistory = require('history').createBrowserHistory;
 
-export default App;
+const app = dva({
+	history: browserHistory(),
+	onError(e) {
+		console.error('catch error', e);
+	},
+});
+
+app.router(router);
+app.start('#root');
+
+export default app._store;
